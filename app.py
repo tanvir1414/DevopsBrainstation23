@@ -1,10 +1,11 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
-from config  import WEATHER_API_KEY
+# from config  import WEATHER_API_KEY
 
 import datetime
 import requests
 import socket
+import os
 
 app = Flask(__name__)
 
@@ -18,6 +19,7 @@ def hello():
     hostname = socket.gethostname()
     current_datetime = datetime.datetime.now().strftime("%y%m%d%H%M")
     version = "1.0"
+    WEATHER_API_KEY = os.environ["WEATHER_API_KEY"]
     
     # Get weather data for Dhaka from OpenWeatherMap (replace with your API key)
     weather_response = requests.get('http://api.openweathermap.org/data/2.5/weather', params={'q': 'Dhaka', 'appid': WEATHER_API_KEY})
